@@ -47,3 +47,7 @@ next-env.d.ts
 
 # Local temp files
 temp/
+
+# 下载/测试产物
+docs/research/costume-gallery/*.log
+docs/design-references/costume-gallery/*-interactions.json
