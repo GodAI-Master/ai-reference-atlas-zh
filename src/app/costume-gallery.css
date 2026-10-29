@@ -178,4 +178,21 @@ body.cg-body{background:radial-gradient(1200px 500px at 15% -10%,#1b2433 0,trans
 .ipanel ul strong{color:var(--tx);font-weight:700}
 /* Tailwind's preflight resets `list-style` on ul; the source panel shows discs. */
 .ipanel ul{list-style:disc}
+/* 头部社交入口（GitHub / 抖音），位于「使用指南」左侧 */
+.hero-actions{display:flex;align-items:flex-start;gap:10px;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
+.hero-actions .infotabs{margin-left:0}
+.social{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.schip{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 14px;border:1px solid #4a525f;border-radius:99px;
+  background:var(--panel);color:#dfe3ea;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;
+  transition:background .15s,border-color .15s,color .15s}
+.schip:hover{background:#232831;border-color:#6a7382;color:#fff}
+.schip:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.schip svg{width:16px;height:16px;flex:0 0 auto;fill:currentColor}
+.schip em{font-style:normal;font-size:12px;font-weight:600;color:var(--tx3);letter-spacing:.02em}
+@media (max-width:560px){
+  .hero-actions{flex-direction:column;align-items:stretch;gap:8px;width:100%}
+  .hero-actions .infotabs{margin-left:auto}
+  .social{justify-content:flex-start}
+  .schip{min-height:38px;font-size:12px;padding:0 12px}
+}
 

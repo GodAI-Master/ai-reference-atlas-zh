@@ -9,6 +9,7 @@ import { categoryZh, tokenZh } from "./zh";
 import { PAGE_SIZE, thumbUrl } from "./source";
 import InfoTabs from "./InfoTabs";
 import Lightbox from "./Lightbox";
+import SocialLinks from "./SocialLinks";
 
 const costumes = costumesJson as unknown as Costume[];
 const meta = metaJson as GalleryMeta;
@@ -146,7 +147,10 @@ export default function CostumeGallery() {
       <header className="hero">
         <div className="hero-top">
           <div className="eyebrow">COSTUME-DB-01 ・ 图像参考用服装集</div>
-          <InfoTabs />
+          <div className="hero-actions">
+            <SocialLinks />
+            <InfoTabs />
+          </div>
         </div>
         <h1>
           <span>服装集</span> 数据库
