@@ -10,7 +10,7 @@
 
 </details>
 
-**在线演示：** <https://ai-costume-gallery.de5.net/>
+**在线演示：** <https://ai-costume-gallery.site/>　（备用：<https://ai-costume-gallery.de5.net/>）
 **原始站点：** <https://ai-costume-gallery.pages.dev/>
 **原作者：** ギア（[@giaaibusi](https://x.com/giaaibusi)）
 **中文版维护：** GodAI · <https://github.com/GodAI-Master>
