@@ -329,7 +329,7 @@ results.escape = await evaluate(`
 
 // 7. header info tab
 results.infoTab = await evaluate(`
-  const tab = document.querySelectorAll('.itab')[0];
+  const tab = document.getElementById('itab0');
   tab.click();
   return new Promise(r => setTimeout(() => {
     const panel = document.getElementById('ipanel0');

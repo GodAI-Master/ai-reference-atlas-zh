@@ -97,7 +97,7 @@ for (let i = 0; i < 40; i++) {
 }
 for (let i = 0; i < 40; i++) {
   const hydrated = await evaluate(`
-    const el = document.querySelector('.itab');
+    const el = document.querySelector('#itab0');
     return !!el && Object.keys(el).some(k => k.startsWith('__reactFiber') || k.startsWith('__reactProps'));
   `);
   if (hydrated) break;
@@ -114,7 +114,7 @@ await shot("closed");
 const report = [];
 for (const i of [0, 1]) {
   const info = await evaluate(`
-    document.querySelectorAll('.itab')[${i}].click();
+    document.getElementById('itab${i}').click();
     return new Promise(r => setTimeout(() => {
       const panel = document.getElementById('ipanel${i}');
       const heading = panel.querySelector('h2')?.textContent;
@@ -126,7 +126,7 @@ for (const i of [0, 1]) {
   `);
   report.push({ tab: i, ...info });
   await shot(`panel${i}`);
-  await evaluate(`document.querySelectorAll('.itab')[${i}].click(); return true;`);
+  await evaluate(`document.getElementById('itab${i}').click(); return true;`);
   await sleep(300);
 }
 
