@@ -1,0 +1,7 @@
+# Research artefacts and comparison screenshots are not needed at runtime,
+# and they add ~8 MB to every upload.
+docs/
+
+# Local build output / dependencies
+.next/
+node_modules/

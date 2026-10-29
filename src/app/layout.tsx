@@ -1,33 +1,29 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "Website Clone",
-  description: "Pixel-perfect website clone",
+  title: "服装集 COSTUME-DB-01",
+  description: "不含人物的纯服装参考图库",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
+/* The source styles everything with a system CJK stack and loads no webfonts, so the
+   template's Geist setup is dropped and no font requests are made. The stack is
+   reordered for Chinese (PingFang SC / Microsoft YaHei / Noto Sans SC) instead of
+   the Japanese Hiragino / Yu Gothic / Meiryo order. */
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="zh-CN" className="h-full">
+      <body className="min-h-full">{children}</body>
     </html>
   );
 }

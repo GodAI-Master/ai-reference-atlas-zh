@@ -1,154 +1,152 @@
-<div align="center">
+# AI Costume Gallery · 中文版
 
-# AI Website Cloner Template
+> 1407 套 AI 服装参考图，日文站点完整汉化，附可直接部署的 Next.js 画廊。
 
-### Clone any website with one command
+![画廊预览](docs/design-references/costume-gallery/live-y0.png)
 
-Give your AI coding agent a URL and watch it recreate the website as a clean Next.js app.
+<details><summary>手机端预览</summary>
 
-**Best results with [Claude Code](https://docs.anthropic.com/en/docs/claude-code) + Opus 5.5. Also supports Codex, Cursor, and OpenCode.**
+![手机端预览](docs/design-references/costume-gallery/zh-m-y0.png)
 
-[![Use this template](https://img.shields.io/badge/Use_this_template-Create_your_copy-2ea44f?style=for-the-badge&logo=github&logoColor=white)](https://github.com/JCodesMore/ai-website-cloner-template/generate) [![Discord](https://img.shields.io/badge/Join_the_community-Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/hrTSX5yTpB)
+</details>
 
-[Quick Start](#quick-start) · [Watch Demo](#demo) · [Supported Platforms](#supported-platforms)
-
-<a href="https://github.com/JCodesMore/ai-website-cloner-template/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License" /></a> <a href="https://github.com/JCodesMore/ai-website-cloner-template"><img src="https://img.shields.io/github/stars/JCodesMore/ai-website-cloner-template?style=flat" alt="Stars" /></a> <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/JCodesMore/ai-website-cloner-template/badges/token-badge.json" alt="tokens" />
-
-  <a href="https://trendshift.io/repositories/24302?utm_source=repository-badge&amp;utm_medium=badge&amp;utm_campaign=badge-repository-24302" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/repositories/24302" alt="JCodesMore%2Fai-website-cloner-template | Trendshift" width="250" height="55" /></a> <a href="https://www.star-history.com/jcodesmore/ai-website-cloner-template/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=JCodesMore/ai-website-cloner-template&amp;theme=dark" /><source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=JCodesMore/ai-website-cloner-template" /><img alt="Star History Global Rank" src="https://api.star-history.com/badge?repo=JCodesMore/ai-website-cloner-template" width="216" height="55" /></picture></a>
-
-</div>
+**在线演示：** <https://ai-costume-gallery.de5.net/>
+**原始站点：** <https://ai-costume-gallery.pages.dev/>
+**原作者：** ギア（[@giaaibusi](https://x.com/giaaibusi)）
+**中文版维护：** GodAI · <https://github.com/GodAI-Master>
+**GitHub：** <https://github.com/GodAI-Master/ai-costume-gallery-zh>
 
 ---
 
-## Demo
+## 这是什么
 
-[![Watch the demo](docs/design-references/comparison.png)](https://youtu.be/O669pVZ_qr0)
+原站是一套面向 AI 绘画的服装参考图库（`衣装集 COSTUME-DB-01`），元数据为日文，单页静态 HTML，无框架、无构建流程。本仓库做了三件事：
 
-> Click the image above to watch the full demo on YouTube.
+1. **缩略图全量镜像** —— 1407 条记录对应的 1407 张缩略图（WEBP 约 270×405，共 14 MB）全部落地，页面不依赖源站即可浏览。
+2. **完整汉化** —— 8 个分类、86 个英文关键词、全部界面文案逐条译为中文，并提供中文检索。
+3. **可用的前端** —— 用 Next.js 16 + React 19 重写，完整实现原站的分类筛选、关键词搜索、分批加载、灯箱浏览与原图下载。
 
-## Quick Start
+## 页面功能
 
-### 1. Set up your project
+- 8 个分类页签，显示各分类图片数
+- ID / 关键词搜索，中英文均可（`蕾丝`、`牛仔`、`黑色`、`denim`、`lace`）
+- 每批 120 张，点击「加载更多」或滚动到底自动追加
+- 卡片点击进入灯箱，先显示缩略图、解码后再升级为展示图
+- `← / →` 切换上一张 / 下一张，`Esc` 关闭，关闭后焦点回到原卡片；手机支持左右滑动
+- 原图下载（PNG 1366×2048）经本地代理流式转发，保证 `download` 属性生效
+- 使用指南 / 注意事项弹窗，支持键盘操作、点击外部关闭，且不会误触下方的卡片
 
-**Recommended: ask your agent.** Paste this into Codex, Claude Code, or your coding agent:
+## 数据规模
 
-```text
-Set up https://github.com/JCodesMore/ai-website-cloner-template
-as a standalone project in a new folder on my computer.
-Ask me where to put it. Clone the repository, remove its origin remote,
-install dependencies, and run npm run check. Leave it ready for me
-to clone a website.
-```
+| 分类 | 条数 |
+| --- | ---: |
+| 春 | 215 |
+| 夏 | 254 |
+| 秋 | 244 |
+| 冬 | 253 |
+| 内衣 | 199 |
+| 派对 | 48 |
+| 泳装 | 54 |
+| 性感 | 140 |
+| **合计** | **1407** |
 
-**Or create your own GitHub repository:**
-
-[![Use this template](https://img.shields.io/badge/Use_this_template-Create_your_copy-2ea44f?style=for-the-badge&logo=github&logoColor=white)](https://github.com/JCodesMore/ai-website-cloner-template/generate)
-
-Give it a name and click **Create repository**. Then give your agent the new repository's link and ask it to clone it onto your computer, install dependencies, and run `npm run check`.
-
-### 2. Clone a website
-
-Open the project in your agent with browser access enabled. In Claude Code or Cursor, run:
-
-```text
-/clone-website https://example.com
-```
-
-Replace the URL with the website you want to recreate. Once it's built, ask your agent for any changes you want.
-
-## Supported Platforms
-
-| Agent                                                         | Status                     |
-| ------------------------------------------------------------- | -------------------------- |
-| [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | **Recommended** — Opus 5.5 |
-| [Codex CLI](https://github.com/openai/codex)                  | Supported                  |
-| [OpenCode](https://opencode.ai/)                              | Supported                  |
-| [Cursor](https://cursor.com/)                                 | Supported                  |
-
-## Prerequisites
-
-- [Node.js](https://nodejs.org/) 24+
-- An AI coding agent (see [Supported Platforms](#supported-platforms))
-
-## Tech Stack
-
-- **Next.js 16** — App Router, React 19, TypeScript strict
-- **shadcn/ui** — Base UI primitives + Tailwind CSS v4
-- **Tailwind CSS v4** — oklch design tokens
-- **Lucide React** — default icons (replaced by extracted SVGs during cloning)
-
-## How It Works
-
-The `/clone-website` skill follows four steps:
-
-1. **Map** — map source URLs to local routes and preserve existing work.
-2. **Observe** — inspect desktop/mobile pages, extract real assets and fonts, and exercise alternate states.
-3. **Build** — implement editable components and working interactions; delegate independent sections when useful.
-4. **Compare** — review source and local pages at matched sizes/states, repair visible differences, and run the production check.
-
-Framer pages and animated sites have focused inspection guidance for responsive variants, media, sticky scenes, and scroll/time-driven motion. Direct HTTP or asset tools handle extraction where practical; browser comparisons establish appearance and behavior. Deliverables include route mappings, run instructions, comparison screenshots, and any remaining gaps.
-
-## Use Cases
-
-- **Platform migration** — rebuild a site you own from WordPress/Webflow/Squarespace into a modern Next.js codebase
-- **Lost source code** — your site is live but the repo is gone, the developer left, or the stack is legacy. Get the code back in a modern format
-- **Learning** — deconstruct how production sites achieve specific layouts, animations, and responsive behavior by working with real code
-
-## Not Intended For
-
-- **Phishing or impersonation** — this project must not be used for deceptive purposes, impersonation, or any activity that breaks the law.
-- **Passing off someone's design as your own** — logos, brand assets, and original copy belong to their owners.
-- **Violating terms of service** — some sites explicitly prohibit scraping or reproduction. Check first.
-
-## Project Structure
+## 目录结构
 
 ```
-src/
-  app/              # Next.js routes
-  components/       # React components
-    ui/             # shadcn/ui primitives
-    sites/<site>/   # Source-specific components and extracted SVGs
-  lib/utils.ts      # cn() utility
-  types/            # TypeScript interfaces
-  hooks/            # Custom React hooks
-public/
-  sites/<site>/     # Source-specific images, fonts, videos, and other assets
-docs/
-  research/<site>/  # Page brief, asset map, and inspection evidence
-  design-references/ # Screenshots
-.agents/skills/
-  clone-website/    # Canonical skill and inspection reference
-.claude/commands/
-  clone-website.md  # Thin Claude Code bridge
-AGENTS.md           # Agent instructions (single source of truth)
-CLAUDE.md           # Claude Code config (imports AGENTS.md)
+.
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx                      # lang=zh-CN、页面元数据
+│   │   ├── page.tsx                        # 首页
+│   │   ├── costume-gallery.css             # 原站样式逐条搬运 + 少量补充
+│   │   └── api/costume-png/[id]/route.ts   # 原图下载代理
+│   ├── components/sites/costume-gallery/
+│   │   ├── CostumeGallery.tsx              # 网格 / 筛选 / 分页
+│   │   ├── Lightbox.tsx                    # 灯箱
+│   │   ├── InfoTabs.tsx                    # 使用指南 / 注意事项
+│   │   ├── match.ts                        # 原站检索谓词 + 中文扩展
+│   │   ├── keywords.ts                     # 日文→英文同义词表（104 条）
+│   │   ├── zh.ts                           # 中文词表（分类 / 86 个关键词）
+│   │   ├── source.ts                       # 素材路径
+│   │   └── types.ts
+│   └── data/
+│       ├── costumes.json                   # 1407 条记录
+│       └── meta.json                       # 分类与计数
+├── public/sites/costume-gallery/thumbs/    # 1407 张缩略图
+├── docs/
+│   ├── research/costume-gallery/           # 源站快照、页面简报、下载脚本
+│   └── design-references/costume-gallery/  # 源站 / 本地 / 线上对照截图
+├── LICENSE
+└── README.md
 ```
 
-## Commands
+## 数据结构
+
+`src/data/costumes.json` 字段与原站一致，字段名保持日文（它们是筛选键），中文只在渲染层替换：
+
+| 字段 | 示例 | 说明 |
+| --- | --- | --- |
+| `id` | `SPR-0001` | 唯一标识，前缀对应分类 |
+| `カテゴリ` | `春` | 8 个分类，中文显示名见 `zh.ts` |
+| `キーワード` | `ivory frill knit denim …` | 英文关键词，界面按词表译成中文 |
+| `サムネ` | `thumbs/SPR-0001.webp` | 缩略图，已本地化 |
+| `画像` | `img/SPR-0001.webp` | 展示图 1366×2048，仍指向源站 |
+| `原寸` | `png/SPR-0001.png` | 原图，经代理下载 |
+
+中文检索由 `match.ts` 处理：保留原站的「ID 命中 / 分类命中 / 关键词前缀匹配」，并新增中文分类名与中文关键词的包含匹配，因此 `白` 会同时命中「白色」与「象牙白」。
+
+## 本地预览
 
 ```bash
-npm run dev    # Start dev server
-npm run build  # Production build
-npm run lint   # ESLint check
-npm run typecheck # TypeScript check
-npm run check  # Run lint + typecheck + build
+npm install
+npm run dev          # http://localhost:3000
 ```
 
-### If using docker
+## 构建与检查
 
 ```bash
-docker compose up app --build # build and run the app
-docker compose up dev --build # run the app in dev mode on port 3001
+npm run check        # lint + typecheck + production build
 ```
 
-## Agent Support
+## 部署到 Vercel
 
-The project keeps one portable Agent Skill at `.agents/skills/clone-website/`. Codex, Cursor, and OpenCode read it directly. Claude Code uses the small command bridge at `.claude/commands/clone-website.md` so `/clone-website` and its arguments continue to work without exposing a duplicate skill to the other agents.
+```bash
+npx vercel deploy --prod
+```
 
-## Star History
+**自定义域名的坑（实测记录）**：接入前先确认根域是否在公共后缀列表（PSL）里。
 
-![Star History Chart](docs/assets/star-history.png)
+- 在 PSL 内的免费二级域名服务（如 `de5.net`），Vercel 把 `xxx.de5.net` 视为独立域名，绑定直接 `verified: true`，只需一条 CNAME。
+- 不在 PSL 的域名（如 `bbroot.com`）会被要求在其根域添加 `_vercel.<根域>` 的 TXT 记录；根域不在你手上时这条路走不通。
 
-## License
+## 素材说明
 
-MIT
+| 层级 | 源站路径 | 本地 | 说明 |
+| --- | --- | --- | --- |
+| 缩略图 | `thumbs/<ID>.webp` | ✅ 全部镜像 | 约 7.5 KB / 张，共 14 MB |
+| 展示图 | `img/<ID>.webp` | ❌ 仍指源站 | 1366×2048，约 93 KB / 张 |
+| 原图 | `png/<ID>.png` | ❌ 仍指源站 | 1366×2048，约 1.1 MB / 张 |
+
+展示图与原图未落地，原因是源站限速约 10 KB/s（实测 5 张展示图共 420 KB 耗时 42.6 秒），1407 张展示图约 131 MB、原图合计数 GB，不具备可行性。因此灯箱以本地缩略图打底，解码成功后再升级为源站展示图；原图下载经 `/api/costume-png/[id]` 流式转发。
+
+如需完全本地化，可复用仓库内的下载器：
+
+```bash
+node docs/research/costume-gallery/download-assets.js \
+  docs/research/costume-gallery/imgs.txt \
+  <仓库绝对路径>/public/sites/costume-gallery
+```
+
+## 内容提示
+
+图库为 AI 生成的虚构服装图像，不含人物面部与人体，亦非真实商品照片。分类名称涉及内衣、性感等题材，仅供艺术创作与前端技术学习使用，请勿用于违法用途。
+
+## 版权与致谢
+
+- **图片与原始数据的著作权归原作者 ギア（@giaaibusi）所有**，来源地址见页首。
+- 本仓库仅为个人学习、汉化与前端工程实践存档，**不对图片主张任何权利**，也不构成对原作品的商业使用授权。
+- 图片数据本身（含原始尺寸与加工后版本）的再分发、转载、转售由原作者禁止；如需商用请自行联系原作者。
+- 若原作者认为本仓库侵犯其权益，请通过 [Issue](https://github.com/GodAI-Master/ai-costume-gallery-zh/issues) 联系，将立即删除相关内容。
+- `LICENSE` 采用 MIT，**该协议只覆盖本仓库的代码**（`src/`、脚本与样式），**不覆盖** `public/sites/`、`src/data/` 中的图片与原始数据。
+- 前端脚手架来自 [JCodesMore/ai-website-cloner-template](https://github.com/JCodesMore/ai-website-cloner-template)（MIT），在此基础上完成站点重建与汉化。
+- 使用指南与注意事项的文案体例参照 [anhao/ai-pose-gallery-zh](https://github.com/anhao/ai-pose-gallery-zh) 的中文版式，并按本站实际情况改写。
