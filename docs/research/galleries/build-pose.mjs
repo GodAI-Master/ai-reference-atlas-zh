@@ -18,6 +18,29 @@ const ANGLE_ORDER = ["正面", "俯视", "仰视", "侧面", "斜侧"];
 
 const rows = JSON.parse(readFileSync(SRC, "utf8"));
 
+/* ------------------------------------------------------------------
+ * Content moderation (2026-10-30, at the maintainer's request)
+ *
+ * The upstream library is an adult-oriented pose reference set. Anything
+ * that depicts or clearly implies a sexual act is excluded here, so the
+ * site can stay public:
+ *
+ *   - 体系「双人缠绵」            two figures, all sexual positions
+ *   - 体系「全身单人・性感系」      erotic solo poses (胯部/开腿/四肢着地…)
+ *   - 分类「性感・大胆系」          hands on chest etc.
+ *   - 分类「挤胸・强调事业线系」     cleavage emphasis
+ *
+ * Everything else (标准系 + 可爱系) is neutral body / gesture reference and
+ * is kept. Edit these sets if the policy changes, then re-run this script.
+ * ------------------------------------------------------------------ */
+const DROP_SYSTEMS = new Set(["双人缠绵", "全身单人・性感系"]);
+const DROP_CATEGORIES = new Set(["性感・大胆系", "挤胸・强调事业线系"]);
+const isAllowed = (r) =>
+  !DROP_SYSTEMS.has(r["体系"]) && !DROP_CATEGORIES.has(r["分类"]);
+
+const allowed = rows.filter(isAllowed);
+console.log(`moderation: kept ${allowed.length}/${rows.length} rows`);
+
 const groupOf = (id) => id.replace(/_[^_]+$/, "");
 const angleRank = (a) => {
   const i = ANGLE_ORDER.indexOf(a);
@@ -26,7 +49,7 @@ const angleRank = (a) => {
 
 // Keep the source order of poses, and the fixed order of angles within a pose.
 const groups = new Map();
-for (const r of rows) {
+for (const r of allowed) {
   const key = groupOf(r.id);
   if (!groups.has(key)) groups.set(key, []);
   groups.get(key).push(r);
@@ -59,13 +82,14 @@ const countFacet = (idx) => {
 };
 
 const sizes = countFacet(1).sort((a, b) => b[1] - a[1]);
+const groupCount = new Set(items.map((it) => it.g)).size;
 
 const data = {
   slug: "pose",
   eyebrow: "POSE-01 ・ 人体姿势参考",
   title: "姿势库",
   subtitle:
-    "288 组人体姿势、1439 张多角度参考图。可切「按姿势」查看同一姿势的 5 个视角，也可「逐张」浏览；同一姿势多视角连用更容易保持姿态一致。",
+    `${groupCount} 组人体姿势、${items.length} 张多角度参考图。可切「按姿势」查看同一姿势的多个视角，也可「逐张」浏览；同一姿势多视角连用更容易保持姿态一致。`,
   unit: "张",
   search: "搜索姿势名、编号或分类",
   ratio: "3/4",
@@ -93,5 +117,5 @@ const data = {
 
 const out = join(ROOT, "src/data/galleries/pose.json");
 writeFileSync(out, JSON.stringify(data));
-console.log(`pose: ${items.length} items / ${groups.size} poses -> ${out}`);
+console.log(`pose: ${items.length} items / ${groupCount} poses -> ${out}`);
 console.log("facets:", data.facets.map((f) => `${f.label}(${f.values.length})`).join(", "));

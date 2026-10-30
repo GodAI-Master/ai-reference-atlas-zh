@@ -24,7 +24,7 @@ const CARDS = [
     href: "/pose",
     tag: "POSE",
     title: "姿势库",
-    desc: "288 组人体姿势、5 个视角，同一姿势多视角连用更容易保持姿态一致。",
+    desc: "98 组人体姿势、每组 5 个视角，同一姿势多视角连用更容易保持姿态一致。",
     count: n((poseJson as { items: unknown[] }).items),
   },
   {
