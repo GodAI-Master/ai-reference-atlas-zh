@@ -19,19 +19,9 @@ const ANGLE_ORDER = ["正面", "俯视", "仰视", "侧面", "斜侧"];
 const rows = JSON.parse(readFileSync(SRC, "utf8"));
 
 /* ------------------------------------------------------------------
- * Content moderation (2026-10-30, at the maintainer's request)
- *
- * The upstream library is an adult-oriented pose reference set. Anything
- * that depicts or clearly implies a sexual act is excluded here, so the
- * site can stay public:
- *
- *   - 体系「双人缠绵」            two figures, all sexual positions
- *   - 体系「全身单人・性感系」      erotic solo poses (胯部/开腿/四肢着地…)
- *   - 分类「性感・大胆系」          hands on chest etc.
- *   - 分类「挤胸・强调事业线系」     cleavage emphasis
- *
- * Everything else (标准系 + 可爱系) is neutral body / gesture reference and
- * is kept. Edit these sets if the policy changes, then re-run this script.
+ * Content moderation: a few upstream systems / categories are excluded at
+ * build time so the site can stay public. Everything else is kept as-is.
+ * Edit these two sets to change the policy, then re-run this script.
  * ------------------------------------------------------------------ */
 const DROP_SYSTEMS = new Set(["双人缠绵", "全身单人・性感系"]);
 const DROP_CATEGORIES = new Set(["性感・大胆系", "挤胸・强调事业线系"]);
