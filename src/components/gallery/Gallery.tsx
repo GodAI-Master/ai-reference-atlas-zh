@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Facet, GalleryData, GalleryItem } from "./types";
+import InfoTabs, { type InfoTab } from "@/components/sites/costume-gallery/InfoTabs";
+import SocialLinks from "@/components/sites/costume-gallery/SocialLinks";
 
 const PAGE_SIZE = 120;
 
@@ -55,7 +57,7 @@ function Card({
   );
 }
 
-export default function Gallery({ data }: { data: GalleryData }) {
+export default function Gallery({ data, infoTabs }: { data: GalleryData; infoTabs?: InfoTab[] }) {
   const base = facetBase(data.slug);
   const primary = data.facets.find((f) => f.primary) ?? data.facets[0];
   const secondary = data.facets.filter((f) => f !== primary);
@@ -144,6 +146,10 @@ export default function Gallery({ data }: { data: GalleryData }) {
       <header className="hero">
         <div className="hero-top">
           <div className="eyebrow">{data.eyebrow}</div>
+          <div className="hero-actions">
+            <SocialLinks />
+            {infoTabs ? <InfoTabs tabs={infoTabs} /> : null}
+          </div>
         </div>
         <h1>
           <span>{data.title}</span>
@@ -195,22 +201,54 @@ export default function Gallery({ data }: { data: GalleryData }) {
               />
             </label>
 
-            {secondary.map((f: Facet) => (
-              <label className="gsel" key={f.key}>
-                <span>{f.label}</span>
-                <select
-                  value={picked[f.key] ?? ""}
-                  onChange={(e) => setPicked((p) => ({ ...p, [f.key]: e.target.value }))}
-                >
-                  <option value="">全部</option>
+            {secondary.map((f: Facet) =>
+              f.values.length <= 6 ? (
+                <div className="seg" key={f.key} role="group" aria-label={`按${f.label}筛选`}>
+                  <span className="seg-l">{f.label}</span>
+                  <button
+                    type="button"
+                    aria-pressed={!picked[f.key]}
+                    onClick={() => {
+                      setN(PAGE_SIZE);
+                      setPicked((p) => ({ ...p, [f.key]: "" }));
+                    }}
+                  >
+                    全部
+                  </button>
                   {f.values.map((v) => (
-                    <option key={v.v} value={v.v}>
-                      {v.l}（{v.n}）
-                    </option>
+                    <button
+                      key={v.v}
+                      type="button"
+                      aria-pressed={picked[f.key] === v.v}
+                      onClick={() => {
+                        setN(PAGE_SIZE);
+                        setPicked((p) => ({ ...p, [f.key]: p[f.key] === v.v ? "" : v.v }));
+                      }}
+                    >
+                      {v.l}
+                    </button>
                   ))}
-                </select>
-              </label>
-            ))}
+                </div>
+              ) : (
+                <label className="gsel" key={f.key}>
+                  <span>{f.label}</span>
+                  <select
+                    value={picked[f.key] ?? ""}
+                    onChange={(e) => {
+                      setN(PAGE_SIZE);
+                      setPicked((p) => ({ ...p, [f.key]: e.target.value }));
+                    }}
+                  >
+                    <option value="">全部</option>
+                    {f.values.map((v) => (
+                      <option key={v.v} value={v.v}>
+                        {v.l}（{v.n}）
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              )
+            )}
 
             <span className="count">
               显示 {view.length.toLocaleString("zh-CN")} {data.unit}

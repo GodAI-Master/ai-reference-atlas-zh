@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 
-type InfoTab = {
+export type InfoTab = {
   label: string;
   heading: string;
   items: ReactNode[];
@@ -14,45 +14,7 @@ type InfoTab = {
  * Content mirrors the guide/notice copy published on ai-pose-gallery.anhao.app
  * (the reference implementation), reproduced verbatim.
  */
-const TABS: InfoTab[] = [
-  {
-    label: "使用指南",
-    heading: "使用指南",
-    items: [
-      <>
-        将参考图导入各类 AI 工具的<strong>服装参考 / 图像参考</strong>功能。
-      </>,
-      <>同一套服装搭配多张参考图，更容易保持生成图片或视频中的服装一致。</>,
-      <>
-        点击卡片或缩略图进入大图，可下载 <strong>1366 × 2048 原尺寸 PNG</strong>，便于查看细节。
-      </>,
-      <>图片为纯服装图像，不包含人物、面部与背景，请通过提示词或其他参考图补充。</>,
-      <>
-        电脑端使用 <strong>← / →</strong> 切换上一张 / 下一张；手机端可左右滑动大图。
-      </>,
-    ],
-  },
-  {
-    label: "注意事项",
-    heading: "注意事项",
-    items: [
-      <>原作者允许免费用于作品制作，包括商业作品、编辑加工与服装参考。</>,
-      <>
-        <strong>禁止对图片数据本身（原尺寸或加工后）进行再分发、转载或转售。</strong>
-      </>,
-      <>署名不是必须的（可自愿标注）。图片元数据已删除，素材按无保证方式提供。</>,
-      <>图中为 AI 生成的虚构服装，并非真实商品。</>,
-      <>请勿用于真实人物、未成年人相关用途或违反公序良俗的用途。</>,
-    ],
-    note: (
-      <>
-        以上为原站注意事项的中文整理。完整条款以原作者发布内容为准；本镜像的公开展示与转载授权问题，请站点维护者另行确认。
-      </>
-    ),
-  },
-];
-
-export default function InfoTabs() {
+export default function InfoTabs({ tabs }: { tabs: InfoTab[] }) {
   const [open, setOpen] = useState<number | null>(null);
   const [panelTop, setPanelTop] = useState<number | null>(null);
 
@@ -154,7 +116,7 @@ export default function InfoTabs() {
 
   return (
     <nav className="infotabs" id="infotabs" ref={navRef} aria-label="使用指南与注意事项">
-      {TABS.map((tab, i) => (
+      {tabs.map((tab, i) => (
         <button
           key={tab.label}
           type="button"
@@ -170,8 +132,8 @@ export default function InfoTabs() {
           onKeyDown={(e) => {
             if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
             e.preventDefault();
-            const step = e.key === "ArrowRight" ? 1 : TABS.length - 1;
-            const next = (i + step) % TABS.length;
+            const step = e.key === "ArrowRight" ? 1 : tabs.length - 1;
+            const next = (i + step) % tabs.length;
             tabRefs.current[next]?.focus();
             if (openRef.current !== null) openTab(next);
           }}
@@ -180,7 +142,7 @@ export default function InfoTabs() {
         </button>
       ))}
 
-      {TABS.map((tab, i) => (
+      {tabs.map((tab, i) => (
         <div
           key={tab.heading}
           className="ipanel"

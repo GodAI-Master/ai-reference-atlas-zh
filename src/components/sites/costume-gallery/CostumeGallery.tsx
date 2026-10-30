@@ -10,6 +10,7 @@ import { PAGE_SIZE, thumbUrl } from "./source";
 import InfoTabs from "./InfoTabs";
 import Lightbox from "./Lightbox";
 import SocialLinks from "./SocialLinks";
+import { COSTUME_INFO } from "@/components/site/info";
 
 const costumes = costumesJson as unknown as Costume[];
 const meta = metaJson as GalleryMeta;
@@ -149,7 +150,7 @@ export default function CostumeGallery() {
           <div className="eyebrow">COSTUME-DB-01 ・ 图像参考用服装集</div>
           <div className="hero-actions">
             <SocialLinks />
-            <InfoTabs />
+            <InfoTabs tabs={COSTUME_INFO} />
           </div>
         </div>
         <h1>

@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { GalleryData, GalleryItem } from "./types";
+import InfoTabs, { type InfoTab } from "@/components/sites/costume-gallery/InfoTabs";
+import SocialLinks from "@/components/sites/costume-gallery/SocialLinks";
 
 type PoseItem = GalleryItem & { g: string; a: string };
 type PoseData = GalleryData & {
@@ -19,7 +21,7 @@ type Open =
   | { mode: "single"; i: number }
   | null;
 
-export default function PoseGallery({ data }: { data: PoseData }) {
+export default function PoseGallery({ data, infoTabs }: { data: PoseData; infoTabs?: InfoTab[] }) {
   const [system, setSystem] = useState("");
   const [cat, setCat] = useState("");
   const [angle, setAngle] = useState("");
@@ -126,6 +128,10 @@ export default function PoseGallery({ data }: { data: PoseData }) {
       <header className="hero">
         <div className="hero-top">
           <div className="eyebrow">{data.eyebrow}</div>
+          <div className="hero-actions">
+            <SocialLinks />
+            {infoTabs ? <InfoTabs tabs={infoTabs} /> : null}
+          </div>
         </div>
         <h1>
           <span>{data.title}</span>

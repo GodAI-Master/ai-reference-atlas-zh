@@ -83,3 +83,14 @@
 .mimg .mfull{position:relative;z-index:1;max-width:100%;max-height:100%;object-fit:contain;opacity:0;
   transition:opacity .25s ease}
 .mimg .mfull.ready{opacity:1}
+/* Native select popup: force dark options so they stay readable on Windows */
+.gsel select option{background:#171b21;color:var(--tx)}
+.gsel select option:checked{background:#2a3340;color:#fff}
+/* Keep segmented labels and buttons from being squeezed by the flex row */
+.seg-l,.seg button{flex:0 0 auto}
+/* Toolbar row: let filter groups keep their intrinsic width and wrap instead of
+   squeezing (a shrunken .seg has overflow-x:auto, which clips its label). */
+.row2 > .seg,.row2 > .gsel,.row2 > .gbtn{flex:0 0 auto}
+.row2 > .seg{padding-left:6px}
+/* Group label inside segmented controls: separate it from the buttons */
+.seg-l{padding:0 9px 0 10px;border-right:1px solid var(--line2);margin-right:4px;font-size:12px}

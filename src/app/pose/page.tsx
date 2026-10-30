@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PoseGallery from "@/components/gallery/PoseGallery";
+import { POSE_INFO } from "@/components/site/info";
 import poseJson from "@/data/galleries/pose.json";
 import type { GalleryData } from "@/components/gallery/types";
 
@@ -10,5 +11,14 @@ export const metadata: Metadata = {
 };
 
 export default function PosePage() {
-  return <PoseGallery data={poseJson as unknown as GalleryData & { group: { by: string; angle: string; order: string[] } }} />;
+  return (
+    <PoseGallery
+      data={
+        poseJson as unknown as GalleryData & {
+          group: { by: string; angle: string; order: string[] };
+        }
+      }
+      infoTabs={POSE_INFO}
+    />
+  );
 }

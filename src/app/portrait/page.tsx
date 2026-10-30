@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Gallery from "@/components/gallery/Gallery";
+import { PORTRAIT_INFO } from "@/components/site/info";
 import portraitJson from "@/data/galleries/portrait.json";
 import type { GalleryData } from "@/components/gallery/types";
 
@@ -10,5 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function PortraitPage() {
-  return <Gallery data={portraitJson as unknown as GalleryData} />;
+  return <Gallery data={portraitJson as unknown as GalleryData} infoTabs={PORTRAIT_INFO} />;
 }
