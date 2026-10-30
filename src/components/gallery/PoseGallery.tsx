@@ -11,8 +11,6 @@ type PoseData = GalleryData & {
 };
 
 const PAGE_SIZE = 120;
-const BASE = "/sites/pose-gallery/";
-
 const anglesOf = (list: PoseItem[], order: string[]) =>
   [...list].sort((a, b) => order.indexOf(a.a) - order.indexOf(b.a));
 
@@ -31,6 +29,7 @@ export default function PoseGallery({ data, infoTabs }: { data: PoseData; infoTa
   const [n, setN] = useState(PAGE_SIZE);
   const [open, setOpen] = useState<Open>(null);
 
+  const base = `/sites/${data.slug}-gallery/`;
   const items = data.items as PoseItem[];
   const primary = data.facets.find((f) => f.primary) ?? data.facets[0];
   const catFacet = data.facets.find((f) => f.key === "cat");
@@ -289,7 +288,7 @@ export default function PoseGallery({ data, infoTabs }: { data: PoseData; infoTa
                       <img
                         loading="lazy"
                         decoding="async"
-                        src={BASE + head.t}
+                        src={base + head.t}
                         alt={head.n}
                         width={head.w}
                         height={head.h}
@@ -328,7 +327,7 @@ export default function PoseGallery({ data, infoTabs }: { data: PoseData; infoTa
                     <img
                       loading="lazy"
                       decoding="async"
-                      src={BASE + item.t}
+                      src={base + item.t}
                       alt={item.n}
                       width={item.w}
                       height={item.h}
@@ -382,7 +381,7 @@ export default function PoseGallery({ data, infoTabs }: { data: PoseData; infoTa
             {currentItem ? (
               <>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="mph" src={BASE + currentItem.t} alt="" aria-hidden="true" />
+                <img className="mph" src={base + currentItem.t} alt="" aria-hidden="true" />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   className="mfull"
@@ -451,7 +450,7 @@ export default function PoseGallery({ data, infoTabs }: { data: PoseData; infoTa
                       onClick={() => setOpen({ ...open, a: ai })}
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={BASE + it.t} alt={it.a} loading="lazy" />
+                      <img src={base + it.t} alt={it.a} loading="lazy" />
                       <span>{it.a}</span>
                     </button>
                   ))}

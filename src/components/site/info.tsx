@@ -114,8 +114,49 @@ export const PORTRAIT_INFO: InfoTab[] = [
   },
 ];
 
+export const DEPTH_INFO: InfoTab[] = [
+  {
+    label: "使用指南",
+    heading: "使用指南",
+    items: [
+      <>
+        作为参考图导入各类 AI 工具的<strong>深度控制 / ControlNet 深度</strong>功能。
+      </>,
+      <>
+        与姿势库是同一套姿势，但输出为<strong>灰度深度图</strong>（纯黑背景），提供三维体块与前后遮挡信息。
+      </>,
+      <>同一姿势连续使用多个视角，更容易保持生成结果的姿态与纵深关系一致。</>,
+      <>
+        点击卡片进入大图，可下载 <strong>900 × 1200 原尺寸 PNG</strong>。
+      </>,
+      <>
+        电脑端使用 <strong>← / →</strong> 切换角度、<strong>↑ / ↓</strong> 切换姿势；手机端可左右滑动大图。
+      </>,
+    ],
+  },
+  {
+    label: "注意事项",
+    heading: "注意事项",
+    items: [
+      <>原作者允许免费用于作品制作，包括商业作品、编辑加工与姿势参考。</>,
+      <>
+        <strong>禁止对图片数据本身（原尺寸或加工后）进行再分发、转载或转售。</strong>
+      </>,
+      <>署名不是必须的（可自愿标注）。图片元数据已删除，素材按无保证方式提供。</>,
+      <>图中为人体素体深度图，并非真实人物。</>,
+      <>请勿用于真实人物、未成年人相关用途或违反公序良俗的用途。</>,
+    ],
+    note: (
+      <>
+        以上为原站注意事项的中文整理。完整条款以原作者发布内容为准；本镜像的公开展示与转载授权问题，请站点维护者另行确认。
+      </>
+    ),
+  },
+];
+
 export const INFO_BY_SLUG: Record<string, InfoTab[]> = {
   costume: COSTUME_INFO,
   pose: POSE_INFO,
+  depth: DEPTH_INFO,
   portrait: PORTRAIT_INFO,
 };

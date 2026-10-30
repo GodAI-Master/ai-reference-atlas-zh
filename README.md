@@ -6,11 +6,11 @@
 
 <a href="https://ai-costume-gallery.site/"><img src="docs/design-references/atlas/home-hero.jpg" alt="AI 参考集合 · 人脸库 / 姿势库 / 服装库" width="100%"></a>
 
-**人脸 1,499 · 姿势 490 · 服装 1,407** ｜ 全部中文化，一套导航贯穿三库
+**人脸 1,499 · 姿势 490 · 深度 490 · 服装 1,407** ｜ 全部中文化，一套导航贯穿四库
 
 </div>
 
-> 把三个人像参考图库整合进一个站：同一套侧边导航、同一套筛选与检索逻辑，缩略图全部本地化。
+> 把四个人像参考图库整合进一个站：同一套侧边导航、同一套筛选与检索逻辑，缩略图全部本地化。
 
 <details><summary>落地页 / 姿势库预览</summary>
 
@@ -26,19 +26,21 @@
 | --- | --- | --- |
 | 人脸库 | <https://ai-portrait-gallery.pages.dev/> | あぎ（CC0） |
 | 姿势库 | <https://ai-pose-gallery.anhao.app/>（中文镜像） | ギア（[@giaaibusi](https://x.com/giaaibusi)） |
+| 深度库 | <https://ai-pose-depth-gallery.pages.dev/>（POSE-DB-02） | ギア（[@giaaibusi](https://x.com/giaaibusi)） |
 | 服装库 | <https://ai-costume-gallery.pages.dev/> | ギア（[@giaaibusi](https://x.com/giaaibusi)） |
 
 ---
 
-## 三个板块
+## 四个板块
 
 | 板块 | 路由 | 条数 | 筛选维度 |
 | --- | --- | ---: | --- |
 | 人脸库 | `/portrait` | 1,499 | 类型（面部特写 893 / 造型参考 606）× 发型（短发 / 中发 / 中长发 / 长发） |
 | 姿势库 | `/pose` | 490 | 体系（2）× 动作分类（10）× 视角（5），98 组姿势 |
+| 深度库 | `/depth` | 490 | 同上，输出为灰度深度图（黑色背景），98 组姿势 |
 | 服装库 | `/costume` | 1,407 | 分类（春 / 夏 / 秋 / 冬 / 内衣 / 派对 / 泳装 / 性感） |
 
-首页 `/` 是三个板块的入口页，左侧固定导航贯穿全站，移动端收为顶部横向导航。
+首页 `/` 是四个板块的入口页，左侧固定导航贯穿全站，移动端收为顶部横向导航。
 
 ## 这是什么
 
@@ -66,6 +68,7 @@
 | --- | --- |
 | 人脸库 | 类型标签 + 发型分段按钮（≤6 个取值用分段控件，避开原生下拉的样式问题） |
 | 姿势库 | 「按姿势 / 逐张」双模式；**同一姿势 4–5 个视角**，灯箱内 `← / →` 切视角、`↑ / ↓` 切姿势，右侧列出体系 / 编号 / 分类 / 当前视角 / 图片规格 |
+| 深度库 | 与姿势库同一套交互（按姿势 / 逐张、多视角切换），卡片为灰度深度图 |
 | 服装库 | 8 个分类标签；卡片描述展示中文关键词（象牙白 · 荷叶边 · 针织 …） |
 
 ## 目录结构
@@ -78,6 +81,7 @@
 │   │   ├── page.tsx                    # 落地页（三板块入口）
 │   │   ├── costume/page.tsx            # 服装库
 │   │   ├── pose/page.tsx               # 姿势库
+│   │   ├── depth/page.tsx              # 深度库（姿势的深度图版本）
 │   │   ├── portrait/page.tsx           # 人脸库
 │   │   ├── shell.css                   # 外壳、工具栏、分段控件
 │   │   ├── costume-gallery.css         # 源站样式（逐条搬运）+ 补充
@@ -90,10 +94,12 @@
 │       ├── costumes.json               # 服装 1407 条（源站原字段）
 │       └── galleries/
 │           ├── pose.json               # 姿势 490 条（含分组与视角）
+│           ├── depth.json              # 深度 490 条（复用姿势库中文标签）
 │           └── portrait.json           # 人脸 1499 条（名称已汉化）
 ├── public/sites/
 │   ├── costume-gallery/thumbs/         # 1407 张
 │   ├── pose-gallery/thumbs/            # 490 张
+│   ├── depth-gallery/thumbs/           # 490 张（由原图本地生成）
 │   └── portrait-gallery/thumbs/        # 1499 张
 ├── docs/
 │   ├── galleries/                      # 数据集构建脚本 + CDP 验证脚本
@@ -111,6 +117,7 @@
 # 从源站数据重建（需先把 images.js / pose-zh.json 下载到本地）
 node docs/research/galleries/build-portrait.mjs <images.js> .
 node docs/research/galleries/build-pose.mjs     <pose-zh.json> .
+node docs/research/galleries/build-depth.mjs    <depth.html> <pose-zh.json> .
 ```
 
 统一 schema：
@@ -128,7 +135,7 @@ node docs/research/galleries/build-pose.mjs     <pose-zh.json> .
 
 姿势库上游含部分不适合公开展示的内容，构建时已按体系与分类整块过滤：**移除 949 条（1439 → 490）**，保留的 490 条为中性人体参考。
 
-过滤规则写在 `build-pose.mjs` 的 `DROP_SYSTEMS` / `DROP_CATEGORIES` 常量中，改一行即可调整；被移除条目的缩略图已从仓库删除，不是仅从列表隐藏。
+过滤规则写在 `build-pose.mjs` / `build-depth.mjs` 的同名常量中，改一行即可调整；深度库沿用同一套规则（两者是同一批姿势的不同渲染）。被移除条目的缩略图已从仓库删除，不是仅从列表隐藏。
 
 ## 本地开发
 
@@ -153,7 +160,7 @@ npx vercel deploy --prod
 
 | 层级 | 本地 | 说明 |
 | --- | --- | --- |
-| 缩略图（三库共 3396 张） | ✅ 全部镜像 | 人脸 400×500 webp、姿势 300×400 jpg、服装 270×405 webp |
+| 缩略图（四库共 3886 张） | ✅ 全部镜像 | 人脸 400×500 webp、姿势 300×400 jpg、服装 270×405 webp |
 | 展示图 / 原图 | ❌ 指向源站 | 人像 1122×1402 PNG、姿势 900×1200 PNG、服装 1366×2048 PNG |
 
 大图未落地：三个源站都有限速（实测约 10 KB/s），人脸原图合计 4.5 GB、服装 1.5 GB、姿势约 1.3 GB，不具备可行性。因此灯箱以本地缩略图打底，解码成功后再升级为源站大图；缺失的缩略图会自动回退到源站 URL，镜像不完整也不会开天窗。

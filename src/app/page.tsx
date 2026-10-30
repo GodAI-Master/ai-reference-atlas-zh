@@ -3,6 +3,7 @@ import Link from "next/link";
 import costumesJson from "@/data/costumes.json";
 import poseJson from "@/data/galleries/pose.json";
 import portraitJson from "@/data/galleries/portrait.json";
+import depthJson from "@/data/galleries/depth.json";
 
 export const metadata: Metadata = {
   title: "AI 参考集合 · 人脸 / 姿势 / 服装",
@@ -26,6 +27,13 @@ const CARDS = [
     title: "姿势库",
     desc: "98 组人体姿势、每组 5 个视角，同一姿势多视角连用更容易保持姿态一致。",
     count: n((poseJson as { items: unknown[] }).items),
+  },
+  {
+    href: "/depth",
+    tag: "DEPTH",
+    title: "深度姿势库",
+    desc: "与姿势库同一套姿势的灰度深度图，带三维体块与遮挡关系，适合深度控制工作流。",
+    count: n((depthJson as { items: unknown[] }).items),
   },
   {
     href: "/costume",

@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-type Counts = { portrait: number; pose: number; costume: number };
+type Counts = { portrait: number; pose: number; depth: number; costume: number };
 
 const LINKS = [
   { href: "/portrait", label: "人脸库", key: "portrait" as const, hint: "面部与造型参考" },
   { href: "/pose", label: "姿势库", key: "pose" as const, hint: "多角度人体姿势" },
+  { href: "/depth", label: "深度库", key: "depth" as const, hint: "姿势的深度图版本" },
   { href: "/costume", label: "服装库", key: "costume" as const, hint: "不含人物的服装" },
 ];
 
