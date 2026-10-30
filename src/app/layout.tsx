@@ -48,7 +48,7 @@ export default function RootLayout({
             <SiteNav counts={counts} />
             <div className="sidefoot">
               <a
-                href="https://github.com/GodAI-Master/ai-costume-gallery-zh"
+                href="https://github.com/GodAI-Master/ai-reference-atlas-zh"
                 target="_blank"
                 rel="noopener noreferrer"
               >

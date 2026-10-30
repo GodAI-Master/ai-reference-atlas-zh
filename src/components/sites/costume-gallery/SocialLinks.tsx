@@ -1,4 +1,4 @@
-const GITHUB_URL = "https://github.com/GodAI-Master/ai-costume-gallery-zh";
+const GITHUB_URL = "https://github.com/GodAI-Master/ai-reference-atlas-zh";
 const DOUYIN_NAME = "甲方之外";
 const DOUYIN_ID = "BeyondPartyA";
 const DOUYIN_URL = "https://v.douyin.com/SpMqdao0Fl0/";
