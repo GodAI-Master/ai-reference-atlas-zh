@@ -9,6 +9,10 @@ export type Facet = {
 
 export type GalleryItem = {
   id: string;
+  /** Pose grouping key; only present in the pose dataset. */
+  g?: string;
+  /** Camera angle of this row; only present in the pose dataset. */
+  a?: string;
   /** One value per facet, in the same order as `data.facets`. */
   f: string[];
   /** Headline shown on the card. */
@@ -32,6 +36,10 @@ export type GalleryData = {
   subtitle: string;
   unit: string;
   search: string;
+  /** CSS aspect-ratio for the card image box, e.g. "3/4". */
+  ratio?: string;
+  /** Pose-only: how rows collapse into one card per pose. */
+  group?: { by: string; angle: string; order: string[] };
   facets: Facet[];
   items: GalleryItem[];
 };

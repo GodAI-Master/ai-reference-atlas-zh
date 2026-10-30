@@ -70,7 +70,10 @@ export default function Gallery({ data }: { data: GalleryData }) {
 
   // Debounced search, same cadence as the costume gallery.
   useEffect(() => {
-    const t = setTimeout(() => setQuery(draft.trim()), 180);
+    const t = setTimeout(() => {
+      setQuery(draft.trim());
+      setN(PAGE_SIZE);
+    }, 180);
     return () => clearTimeout(t);
   }, [draft]);
 
@@ -92,11 +95,8 @@ export default function Gallery({ data }: { data: GalleryData }) {
   const shown = view.slice(0, n);
   const remaining = Math.max(view.length - n, 0);
 
-  useEffect(() => {
-    setN(PAGE_SIZE);
-  }, [picked, query]);
-
   const selectFacet = (key: string, value: string) => {
+    setN(PAGE_SIZE);
     setPicked((prev) => ({ ...prev, [key]: prev[key] === value ? "" : value }));
     const el = toolsRef.current;
     if (el) window.scrollTo({ top: Math.min(window.scrollY, el.offsetTop) });
@@ -220,7 +220,7 @@ export default function Gallery({ data }: { data: GalleryData }) {
       </div>
 
       <main>
-        <div className="grid">
+        <div className="grid" style={{ ["--ar" as string]: data.ratio }}>
           {shown.map((item, index) => (
             <Card key={item.id} item={item} index={index} base={base} onOpen={setOpenIndex} />
           ))}
@@ -254,17 +254,26 @@ export default function Gallery({ data }: { data: GalleryData }) {
           <div className="mimg">
             {current ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img
-                id="mimg"
-                src={current.u}
-                alt={current.n}
-                onError={(e) => {
-                  const el = e.currentTarget;
-                  if (el.dataset.fallback === "1") return;
-                  el.dataset.fallback = "1";
-                  el.src = current.tu;
-                }}
-              />
+              <>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="mph" src={base + current.t} alt="" aria-hidden="true" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  id="mimg"
+                  className="mfull"
+                  key={current.id}
+                  src={current.u}
+                  alt={current.n}
+                  onLoad={(e) => e.currentTarget.classList.add("ready")}
+                  onError={(e) => {
+                    const el = e.currentTarget;
+                    el.classList.remove("ready");
+                    if (el.dataset.fallback === "1") return;
+                    el.dataset.fallback = "1";
+                    el.src = current.tu;
+                  }}
+                />
+              </>
             ) : null}
             <button className="nav l" aria-label="上一张" onClick={() => step(-1)}>
               ‹

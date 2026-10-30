@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -40,10 +41,10 @@ export default function RootLayout({
       <body className="min-h-full">
         <div className="app">
           <aside className="side">
-            <a className="brand" href="/">
+            <Link className="brand" href="/">
               <b>AI 参考集合</b>
               <span>reference atlas</span>
-            </a>
+            </Link>
             <SiteNav counts={counts} />
             <div className="sidefoot">
               <a
