@@ -6,7 +6,7 @@
 
 <a href="https://ai-costume-gallery.site/"><img src="docs/design-references/atlas/home-hero.jpg" alt="AI 参考集合 · 人脸库 / 姿势库 / 服装库" width="100%"></a>
 
-**人脸 1,499 · 姿势 490 · 深度 490 · 服装 1,407** ｜ 全部中文化，一套导航贯穿四库
+**人脸 1,499 · 姿势 490 · 深度姿势 490 · 服装 1,407** ｜ 全部中文化，一套导航贯穿四库
 
 </div>
 
