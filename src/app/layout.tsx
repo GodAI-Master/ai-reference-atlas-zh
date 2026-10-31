@@ -14,7 +14,7 @@ import depthJson from "@/data/galleries/depth.json";
 export const metadata: Metadata = {
   title: "AI 参考集合 · 人脸 / 姿势 / 服装",
   description:
-    "面向 AI 绘画与视频创作的一站式参考图库：人脸库 1499 张、姿势库 490 张、深度库 490 张、服装库 1407 张，全部中文化，可按维度筛选。",
+    "面向 AI 绘画与视频创作的一站式参考图库：人脸库 1499 张、姿势库 490 张、深度姿势库 490 张、服装库 1407 张，全部中文化，可按维度筛选。",
 };
 
 export const viewport: Viewport = {

@@ -26,7 +26,7 @@
 | --- | --- | --- |
 | 人脸库 | <https://ai-portrait-gallery.pages.dev/> | あぎ（CC0） |
 | 姿势库 | <https://ai-pose-gallery.anhao.app/>（中文镜像） | ギア（[@giaaibusi](https://x.com/giaaibusi)） |
-| 深度库 | <https://ai-pose-depth-gallery.pages.dev/>（POSE-DB-02） | ギア（[@giaaibusi](https://x.com/giaaibusi)） |
+| 深度姿势库 | <https://ai-pose-depth-gallery.pages.dev/>（POSE-DB-02） | ギア（[@giaaibusi](https://x.com/giaaibusi)） |
 | 服装库 | <https://ai-costume-gallery.pages.dev/> | ギア（[@giaaibusi](https://x.com/giaaibusi)） |
 
 ---
@@ -37,7 +37,7 @@
 | --- | --- | ---: | --- |
 | 人脸库 | `/portrait` | 1,499 | 类型（面部特写 893 / 造型参考 606）× 发型（短发 / 中发 / 中长发 / 长发） |
 | 姿势库 | `/pose` | 490 | 体系（2）× 动作分类（10）× 视角（5），98 组姿势 |
-| 深度库 | `/depth` | 490 | 同上，输出为灰度深度图（黑色背景），98 组姿势 |
+| 深度姿势库 | `/depth` | 490 | 同上，输出为灰度深度图（黑色背景），98 组姿势 |
 | 服装库 | `/costume` | 1,407 | 分类（春 / 夏 / 秋 / 冬 / 内衣 / 派对 / 泳装 / 性感） |
 
 首页 `/` 是四个板块的入口页，左侧固定导航贯穿全站，移动端收为顶部横向导航。
@@ -68,7 +68,7 @@
 | --- | --- |
 | 人脸库 | 类型标签 + 发型分段按钮（≤6 个取值用分段控件，避开原生下拉的样式问题） |
 | 姿势库 | 「按姿势 / 逐张」双模式；**同一姿势 4–5 个视角**，灯箱内 `← / →` 切视角、`↑ / ↓` 切姿势，右侧列出体系 / 编号 / 分类 / 当前视角 / 图片规格 |
-| 深度库 | 与姿势库同一套交互（按姿势 / 逐张、多视角切换），卡片为灰度深度图 |
+| 深度姿势库 | 与姿势库同一套交互（按姿势 / 逐张、多视角切换），卡片为灰度深度图 |
 | 服装库 | 8 个分类标签；卡片描述展示中文关键词（象牙白 · 荷叶边 · 针织 …） |
 
 ## 目录结构
@@ -81,7 +81,7 @@
 │   │   ├── page.tsx                    # 落地页（三板块入口）
 │   │   ├── costume/page.tsx            # 服装库
 │   │   ├── pose/page.tsx               # 姿势库
-│   │   ├── depth/page.tsx              # 深度库（姿势的深度图版本）
+│   │   ├── depth/page.tsx              # 深度姿势库（灰度深度图）
 │   │   ├── portrait/page.tsx           # 人脸库
 │   │   ├── shell.css                   # 外壳、工具栏、分段控件
 │   │   ├── costume-gallery.css         # 源站样式（逐条搬运）+ 补充
@@ -135,7 +135,7 @@ node docs/research/galleries/build-depth.mjs    <depth.html> <pose-zh.json> .
 
 姿势库上游含部分不适合公开展示的内容，构建时已按体系与分类整块过滤：**移除 949 条（1439 → 490）**，保留的 490 条为中性人体参考。
 
-过滤规则写在 `build-pose.mjs` / `build-depth.mjs` 的同名常量中，改一行即可调整；深度库沿用同一套规则（两者是同一批姿势的不同渲染）。被移除条目的缩略图已从仓库删除，不是仅从列表隐藏。
+过滤规则写在 `build-pose.mjs` / `build-depth.mjs` 的同名常量中，改一行即可调整；深度姿势库沿用同一套规则（两者是同一批姿势的不同渲染）。被移除条目的缩略图已从仓库删除，不是仅从列表隐藏。
 
 ## 本地开发
 
